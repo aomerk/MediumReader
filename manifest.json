@@ -5,9 +5,8 @@
   "permissions": [
     "cookies",
     "tabs",
-    "http://*/*",
-    "webNavigation",
-    "https://*/*"
+    "*://*.medium.com/",
+    "webNavigation"
   ],
   "background": {
     "scripts": [

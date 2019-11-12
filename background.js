@@ -54,6 +54,11 @@ chrome.cookies.onChanged.addListener(function (info) {
     removeAll();
 });
 
+// setInterval(() => {
+//     removeAll()
+// }, 5000);
+
+
 // remove all cookies
 function removeAll() {
     let all_cookies = [];
@@ -67,7 +72,7 @@ function removeAll() {
     for (let i = 0; i < count; i++) {
         this.removeCookie(all_cookies[i]);
     }
-    timer.reset();
+    // timer.reset();
     chrome.cookies.getAll({}, function (cookies) {
         for (let i in cookies) {
             if (cookies[i].domain === ".medium.com" || cookies[i].domain === "medium.com") {
@@ -80,9 +85,14 @@ function removeAll() {
 
 // remove a single cookie
 function removeCookie(cookie) {
-    let url = "http" + (cookie.secure ? "s" : "") + "://" + cookie.domain +
-        cookie.path;
-    chrome.cookies.remove({"url": url, "name": cookie.name});
+    let url = "http" + (cookie.secure ? "s" : "") + "://" + (cookie.domain.toString().includes(".medium") ? "www.medium.com" : "medium.com" )  + cookie.path;
+    // + (cookie.domain.url.include() ? ".medium" : ) 
+    console.log(cookie.domain);
+    
+    chrome.cookies.remove({
+        "url": url,
+        "name": cookie.name
+    }, (removedCooke) => console.table(removedCooke));
 }
 
 
